@@ -31,5 +31,14 @@ namespace AdvancedProgramming.Business.Manager
         {
             _repository.Update(entity);
         }
+        public bool ValidateRole()
+        {
+            var roles = _repository.GetAll();
+            if(roles.Count() == 0) 
+            { 
+                return false;
+            }
+            return true;
+        }
     }
 }
