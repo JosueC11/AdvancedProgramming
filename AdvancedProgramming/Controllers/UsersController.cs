@@ -14,6 +14,7 @@ namespace AdvancedProgramming.Controllers
     public class UsersController : Controller
     {
         private readonly UserManager _manager = new UserManager();
+        private readonly RoleManager _managerRole = new RoleManager();
 
         // GET: Users
         public ActionResult Index()
@@ -40,6 +41,12 @@ namespace AdvancedProgramming.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
+            var validate = _managerRole.ValidateRole();
+            if (validate == false) 
+            {
+                TempData["ValidateRole"] = validate;
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
